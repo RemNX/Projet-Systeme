@@ -1,4 +1,5 @@
-import sys,os
+import os
+import sys
 
 #,à changer-------
 #fichierdonnées=sys.argv[1]
@@ -46,7 +47,6 @@ for i in range(0,len(longueurdonde)):
     #2 lorsque la valeur lambda sort de l'intervalle
     else:
         #2 créer la clef et ajoute de la liste temporaire au dictionnaire
-        clef="valeurs entre : ["+str(minintervalle)+", "+str(maxintervalle)+"["
         clef=str([minintervalle,maxintervalle])
         dicodonnées[clef]=templist
         #2 changer l'intervalle pour passer a l'intervalle suivant
@@ -55,12 +55,10 @@ for i in range(0,len(longueurdonde)):
         templist=[]
         templist.append(intensite[i])
 
-#2 création d'un strin qui affiche tous les intervalles ainsi que leurs index
+#2 création d'un string qui affiche tous les intervalles ainsi que leurs index
 affichagedico=""
-ind=-1
 for i in dicodonnées:
-    ind+=1
-    affichagedico+="index= "+str(ind)+", "+"valeurs entre : ["+Strtolist(i)[0]+", "+Strtolist(i)[1]+"["+"\n"+str(dicodonnées[i])+"\n\n"
+    affichagedico+="valeurs entre : ["+Strtolist(i)[0]+", "+Strtolist(i)[1]+"["+"\n"+str(dicodonnées[i])+"\n\n"
 
 if __name__ =='__main__':
     print(affichagedico)
@@ -71,5 +69,5 @@ def getdico():
 def getintensite():
     return intensite
 
-def getlongueurdonde():
+def getlambda():
     return longueurdonde

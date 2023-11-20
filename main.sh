@@ -3,8 +3,12 @@
 
 python3 intensite.py
 
-echo Choississez un index
+echo choissisez un début d\'intervalle
 
-read index
+read deb
 
-python3 recherche_plot.py $index
+echo choissisez une fin d\'intervale
+
+read fin
+
+python3 recherche_plot.py $deb $fin
