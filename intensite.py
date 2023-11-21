@@ -4,6 +4,7 @@ import sys
 fichierdonnées=sys.argv[1]
 taillefenetre=float(sys.argv[2])
 
+
 # region #! fonction utilitaires
 def Strtolist(strl):
     return strl.strip('][').split(', ')
