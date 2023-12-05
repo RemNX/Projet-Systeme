@@ -14,21 +14,25 @@ deb=float(sys.argv[3])
 fin=float(sys.argv[4])
 # endregion
 
+# region #! verifier les valeurs (impossible en bash)
+if deb>getmax() or fin<getmin():
+    print("intervalle non compris dans les données possibles")
+    exit()
+
+
+# endregion
+
+
 # region #! remplis les listes avec les valeurs des intervalles
 for i in dico:
     clef1=float(Strtolist(i)[0])
-    clef2=float(Strtolist(i)[1])
+    clef2=float(Strtolist(i)[-1])
+    lamb=Strtolist(i)
     # cherche tous les intervalles compris entre le début et la fin choisis par l'utilisateur
     if clef2>deb and clef1<fin:
         listintervalles.append(i)
-        for j in range(len(getlambda())):                   #possiblité de faire avec seulement le premier et dernier intervalle [0] [-1]
-            if (clef1>=getlambda()[j] and clef1<getlambda()[j+1]):
-                debindex=getlambda().index(getlambda()[j+1])
-            elif (clef2>=getlambda()[j] and clef2<getlambda()[j+1]):
-                finindex=getlambda().index(getlambda()[j+1])
-        for j in range(debindex,finindex):
-            listlambda.append(getlambda()[j])
-            listintensite.append(getintensite()[j])
+        listlambda+=lamb
+        listintensite+=dico.get(i)
 # endregion
 
 # region #! calcul des valeurs (moyennes, max, etc)
@@ -44,9 +48,9 @@ for j in listintensite:
     valsum+=j
 valmoyenne=round(valsum/nbintensite,3)
 if len(listintervalles)==1:
-    textintervalles=f"les valeurs sont comprises dans [{Strtolist(listintervalles[0])[0]} ; {Strtolist(listintervalles[0])[1]}["
+    textintervalles=f"les valeurs sont comprises dans [{Strtolist(listintervalles[0])[0]} ; {Strtolist(listintervalles[0])[-1]}["
 elif len(listintervalles)>1:
-    textintervalles=f"Les valeurs sont comprises entre les intervalles [{Strtolist(listintervalles[0])[0]} ; {Strtolist(listintervalles[0])[1]}[ et [{Strtolist(listintervalles[-1])[0]} ; {Strtolist(listintervalles[-1])[1]}["
+    textintervalles=f"Les valeurs sont comprises entre les intervalles [{Strtolist(listintervalles[0])[0]} ; {Strtolist(listintervalles[0])[-1]}[ et [{Strtolist(listintervalles[-1])[0]} ; {Strtolist(listintervalles[-1])[-1]}["
 
 # endregion
 
@@ -54,6 +58,11 @@ elif len(listintervalles)>1:
 fig, ax = plt.subplots(figsize=(8,7))
 
 ax.plot(listlambda,listintensite)
+
+#léger problème incomprehensible sur le nombre de valeurs affiché en abscisse
+listvaleuraaaffiche=[0,.2*len(listlambda),.4*len(listlambda),.6*len(listlambda),.8*len(listlambda),.99*len(listlambda)]
+plt.xticks(listvaleuraaaffiche)
+
 ax.set_xlabel("Longueur d'onde (nm)")
 ax.set_ylabel("Intensité (coups)")
 plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.25)
