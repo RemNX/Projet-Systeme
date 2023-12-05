@@ -61,7 +61,7 @@ for i in dicodonnées:
 # region #! fonction transmission
 if __name__ =='__main__':
     print(affichagedico)
-    print("intervalles possible entre "+ str(longueurdonde[0])+"et "+str(longueurdonde[-1]))
+    print("intervalles possible entre "+ str(longueurdonde[0])+" et "+str(longueurdonde[-1]))
 
 def getmin():
     return longueurdonde[0]

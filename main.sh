@@ -2,9 +2,11 @@
 # ajout csv
 #afficher les commentaires du fichier
 
-#option affiche tout le graph sans demander debut et fin
 #commentaire git instruction
 
+
+fichier=$1
+pas=$2
 
 #region #!paramètre et desc
 Help()
@@ -19,40 +21,47 @@ Help()
     echo
 }
 
-while getopts ":h" option; do
+while getopts ":ha" option; do
     case $option in
         h)
         Help
         exit;;
+        a)
+        fichier=$2
+        pas=$3
+        deb=-2000000000
+        fin=2000000000
     esac
 done
 #endregion
 
 #region #!----Verification sur intensite.py-----
 #,verification sur les paramètres
-if ! [[ $2 =~ ^[0-9.]+$ ]];then
+if ! [[ $pas =~ ^[0-9.]+$ ]];then
     echo le pas n\'est pas un nombre positif
     exit
-elif (( $2 == 0 ));then
+elif (( $pas == 0 ));then
     echo le pas ne peut pas être égal à \0
     exit
 fi
 
 #, verification de l'extension
-ext=${1##*.}
+ext=${fichier##*.}
 if [[ $ext != txt ]];then
     echo les seules extensions acceptés sont .txt
     exit
 fi
 #endregion
 
-python3 intensite.py $1 $2
+python3 intensite.py $fichier $pas
 
-echo choissisez un début d\'intervalle
-read deb
+if (( fin != 2000000000));then
+    echo choissisez un début d\'intervalle
+    read deb
 
-echo choissisez une fin d\'intervale
-read fin
+    echo choissisez une fin d\'intervale
+    read fin
+fi
 
 #region #!----Verification sur recherch_plot.py-------
 #, verification caractères intervalle
@@ -68,4 +77,4 @@ fi
 #endregion
 
 #problème du intensite.py importé qui essaye d'utiliser le $deb et $fin en $1 et $2
-python3 recherche_plot.py $1 $2 $deb $fin
+python3 recherche_plot.py $fichier $pas $deb $fin
