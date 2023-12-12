@@ -19,9 +19,7 @@ if deb>getmax() or fin<getmin():
     print("intervalle non compris dans les données possibles")
     exit()
 
-
 # endregion
-
 
 # region #! remplis les listes avec les valeurs des intervalles
 for i in dico:

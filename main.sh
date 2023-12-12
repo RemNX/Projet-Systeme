@@ -1,9 +1,13 @@
-# delimitateur
-# ajout csv
-#afficher les commentaires du fichier
+#TODO delimitateur universel, enlever premier et dernier string, créer delimitateur entre deux chiffres
+#TODO verifier nombre de colonne
+#TODO nom de variables anglais
+#TODO commentaires anglais
+#TODO compléter extensions
+#TODO commandes vides -> affiche aide
+#TODO pas par défaut
+#TODO dichotomie
 
-#commentaire git instruction
-
+#TODO readme (final, à l'aide)
 
 fichier=$1
 pas=$2
@@ -28,9 +32,9 @@ while getopts ":ha" option; do
         exit;;
         a)
         fichier=$2
-        pas=$3
         deb=-2000000000
         fin=2000000000
+        pas=10
     esac
 done
 #endregion
